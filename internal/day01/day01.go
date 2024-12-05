@@ -18,7 +18,7 @@ func Part01(input string) string {
 func Part02(input string) string {
 	leftNums, rightNums := prepare(input)
 	countMap := count(rightNums)
-	return fmt.Sprint(similartyScore(leftNums, countMap))
+	return fmt.Sprint(similarityScore(leftNums, countMap))
 }
 
 func prepare(input string) ([]int, []int) {
@@ -63,7 +63,7 @@ func count(rightNums []int) map[int]int {
 	return countMap
 }
 
-func similartyScore(leftNums []int, countMap map[int]int) int {
+func similarityScore(leftNums []int, countMap map[int]int) int {
 	score := 0
 	for _, ln := range leftNums {
 		if countMap[ln] != 0 {
