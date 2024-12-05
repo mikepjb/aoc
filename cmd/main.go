@@ -17,6 +17,7 @@ func main() {
 
 	if err == nil {
 		input01 := string(file01)
-		fmt.Println(day01.Part01(string(input01)))
+		fmt.Printf("Day 01, Part 01: %v\n", day01.Part01(string(input01)))
+		fmt.Printf("Day 01, Part 02: %v\n", day01.Part02(string(input01)))
 	}
 }
