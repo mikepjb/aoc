@@ -1,1 +1,6 @@
 *.txt
+.clj-kondo
+.lsp
+.nrepl-port
+.cpcache
+*~

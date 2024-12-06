@@ -1,3 +1,4 @@
+# cd ./2024/go && make -k
 .PHONY: run
 
 run:
