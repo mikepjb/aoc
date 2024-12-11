@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"hypalynx.com/aoc/internal/day01"
+	"hypalynx.com/aoc/internal/day11"
 )
 
 //go:embed input
@@ -19,5 +20,12 @@ func main() {
 		input01 := string(file01)
 		fmt.Printf("Day 01, Part 01: %v\n", day01.Part01(string(input01)))
 		fmt.Printf("Day 01, Part 02: %v\n", day01.Part02(string(input01)))
+	}
+
+	file11, err := inputDir.ReadFile("input/day11.txt")
+	if err == nil {
+		input11 := string(file11)
+		fmt.Printf("Day 11, Part 01: %v\n", day11.Part01(string(input11)))
+		fmt.Printf("Day 11, Part 02: %v\n", day11.Part02(string(input11)))
 	}
 }
