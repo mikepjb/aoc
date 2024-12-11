@@ -6,7 +6,13 @@ import (
 	"strings"
 )
 
-func Part01(input string) string {
+func Part01(input string, blinks int) int {
+	result := Observe(strings.TrimSpace(input), blinks)
+	stones := strings.Split(result, " ")
+	return len(stones)
+}
+
+func Observe(input string, blinks int) string {
 	stoneStrs := strings.Split(input, " ")
 	stones := []int64{}
 
@@ -17,9 +23,15 @@ func Part01(input string) string {
 		}
 	}
 
-	return toString(apply(blink, stones))
-	// return fmt.Sprintf("%v", apply(blink, stones))
-	// return fmt.Sprintf("%v", stones)
+	numberOfBlinks := 0
+	targetNumberOfBlinks := blinks
+
+	for numberOfBlinks < targetNumberOfBlinks {
+		stones = apply(blink, stones)
+		numberOfBlinks++
+	}
+
+	return toString(stones)
 }
 
 func Part02(input string) string {
@@ -49,7 +61,6 @@ func blink(stone int64) []int64 {
 	case stone == 0:
 		return []int64{1}
 	case stoneLen%2 == 0:
-		// split string into 2
 		halfway := stoneLen / 2
 		first, _ := strconv.ParseInt(stoneStr[0:halfway], 10, 64)
 		second, _ := strconv.ParseInt(stoneStr[halfway:stoneLen], 10, 64)
