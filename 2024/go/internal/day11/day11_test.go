@@ -26,12 +26,12 @@ func TestPart01SecondSample(t *testing.T) {
 		t.Fatalf("%v is not %v", result, expectation)
 	}
 
-	firstCount := day11.Part01(input, 6)
+	firstCount := day11.Both(input, 6)
 	if firstCount != 22 {
 		t.Fatalf("%v is not 22", firstCount)
 	}
 
-	secondCount := day11.Part01(input, 25)
+	secondCount := day11.Both(input, 25)
 	if secondCount != 55312 {
 		t.Fatalf("%v is not 22", secondCount)
 	}

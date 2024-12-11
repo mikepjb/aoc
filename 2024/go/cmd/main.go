@@ -25,7 +25,7 @@ func main() {
 	file11, err := inputDir.ReadFile("input/day11.txt")
 	if err == nil {
 		input11 := string(file11)
-		fmt.Printf("Day 11, Part 01: %v\n", day11.Part01(string(input11), 25))
-		fmt.Printf("Day 11, Part 02: %v\n", day11.Part02(string(input11)))
+		fmt.Printf("Day 11, Part 01: %v\n", day11.Both(string(input11), 25))
+		fmt.Printf("Day 11, Part 02: %v\n", day11.Both(string(input11), 75))
 	}
 }
