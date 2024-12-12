@@ -3,6 +3,8 @@ package main
 import (
 	"embed"
 	"fmt"
+	"log"
+	"time"
 
 	"hypalynx.com/aoc/internal/day01"
 	"hypalynx.com/aoc/internal/day11"
@@ -26,6 +28,10 @@ func main() {
 	if err == nil {
 		input11 := string(file11)
 		fmt.Printf("Day 11, Part 01: %v\n", day11.Both(string(input11), 25))
+
+		start := time.Now()
 		fmt.Printf("Day 11, Part 02: %v\n", day11.Both(string(input11), 75))
+		end := time.Now()
+		log.Println("Day 11, Part 02 in seconds:", end.Sub(start))
 	}
 }

@@ -4,7 +4,13 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+    "sync"
 )
+
+// broken async brute force solution
+// I think the only way really is to take each initial stone and split it, iterate 75 times and
+// then count that.. store the count and work your way through to avoid consuming too much memory..
+// doesn't address the cpu time problem though, it's taking an age to calculate at 75 blinks
 
 func Both(input string, blinks int) int {
 	result := Observe(strings.TrimSpace(input), blinks)
@@ -27,15 +33,11 @@ func Observe(input string, blinks int) string {
 	targetNumberOfBlinks := blinks
 
 	for numberOfBlinks < targetNumberOfBlinks {
-		stones = apply(blink, stones)
+		stones = papply(blink, stones)
 		numberOfBlinks++
 	}
 
 	return toString(stones)
-}
-
-func Part02(input string) string {
-	return "no"
 }
 
 func apply(fn func(stone int) []int, stones []int) []int {
@@ -43,6 +45,38 @@ func apply(fn func(stone int) []int, stones []int) []int {
 	for _, s := range stones {
 		result = append(result, blink(s)...)
 	}
+	return result
+}
+
+func papply(fn func(stone int) []int, stones []int) []int {
+	result := []int{}
+    ch := make(chan int)
+    var mu sync.Mutex
+    var wg sync.WaitGroup
+
+    wg.Add(len(stones))
+
+	for _, stone := range stones {
+        go func() {
+            defer wg.Done()
+            for _, bs := range blink(stone) {
+                ch <- bs
+            }
+        }()
+	}
+
+    go func() {
+        for bs := range ch {
+            mu.Lock()
+            result = append(result, bs)
+            mu.Unlock()
+        }
+    }()
+
+
+    wg.Wait()
+    close(ch)
+
 	return result
 }
 
